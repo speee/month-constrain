@@ -15,7 +15,6 @@ module Month::Constrain
         Date.new(Regexp.last_match(1).to_i, Regexp.last_match(2).to_i, 1)
       end
     rescue ArgumentError => ex
-      logger.warn("#{ex.message} (#{ex.class})")
       nil
     end
   end

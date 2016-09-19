@@ -3,7 +3,7 @@ module Month::Constrain
     def self.setter(target_class, columns)
       target_class.class_eval do
         columns.each do |column|
-          define_method "#{attr}=" do |val|
+          define_method "#{column}=" do |val|
             super(self.class.month_constrain(val))
           end
         end
