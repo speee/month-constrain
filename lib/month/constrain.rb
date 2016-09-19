@@ -1,7 +1,5 @@
-require "month/constrain/version"
+require 'active_record' unless defined? ActiveRecord
+require 'month/constrain/version'
+require 'month/constrain/active_record_base'
 
-module Month
-  module Constrain
-    # Your code goes here...
-  end
-end
+ActiveRecord::Base.send :extend, Month::Constrain::ActiveRecordBase
