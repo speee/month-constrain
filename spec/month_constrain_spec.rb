@@ -11,6 +11,10 @@ describe MonthConstrain do
   before { User.destroy_all }
   subject { User.create(registration_month: base_date) }
 
+  it 'has a version number' do
+    expect(MonthConstrain::VERSION).not_to be nil
+  end
+
   describe '.month_constrain' do
     [
       '2016-01',
