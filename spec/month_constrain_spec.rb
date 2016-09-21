@@ -62,7 +62,7 @@ describe MonthConstrain do
         ['2015-12'        , '2016-02'        , [subject]],
         ['2016-02'        , '2015-12'        , []],
       ].each do |from, to, expected|
-        result = User.__send__("#{column}_in", [from, to])
+        result = User.__send__("#{column}_in", from, to)
         expect(result).to contain_exactly(*expected)
       end
     end
