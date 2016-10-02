@@ -13,16 +13,16 @@ module MonthConstrain::ActiveRecordBase
     def self.scope(target_class, columns)
       target_class.class_eval do
         columns.each do |column|
-          scope "#{column}_in".to_sym, -> (from, to) do
+          scope "#{column}_in".to_sym, lambda { |from, to|
             relation = self
             relation = relation.where("#{column} >= ?", month_constrain(from)) if from
             relation = relation.where("#{column} <= ?", month_constrain(to)) if to
             relation
-          end
+          }
 
-          scope column.to_s.to_sym, -> (val) do
+          scope column.to_s.to_sym, lambda { |val|
             where(column => month_constrain(val))
-          end
+          }
         end
       end
     end
