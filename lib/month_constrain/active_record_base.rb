@@ -9,10 +9,10 @@ module MonthConstrain
 
     def month_constrain(value)
       case value
-        when Date, Time, ActiveSupport::TimeWithZone
-          Date.new(value.year, value.month, 1)
-        when /\A(\d{4})-(\d{1,2})/
-          Date.new(Regexp.last_match(1).to_i, Regexp.last_match(2).to_i, 1)
+      when Date, Time, ActiveSupport::TimeWithZone
+        Date.new(value.year, value.month, 1)
+      when /\A(\d{4})-(\d{1,2})/
+        Date.new(Regexp.last_match(1).to_i, Regexp.last_match(2).to_i, 1)
       end
     rescue ArgumentError => ex
       nil

@@ -20,7 +20,7 @@ module MonthConstrain::ActiveRecordBase
             relation
           end
 
-          scope "#{column}".to_sym, -> (val) do
+          scope column.to_s.to_sym, -> (val) do
             where(column => month_constrain(val))
           end
         end
@@ -28,4 +28,3 @@ module MonthConstrain::ActiveRecordBase
     end
   end
 end
-
