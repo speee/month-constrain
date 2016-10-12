@@ -50,30 +50,30 @@ describe MonthConstrain do
   end
 
   describe 'scope' do
-    it "should return records [column]_in in the period", :aggregate_failures do
+    it 'should return records [column]_in in the period', :aggregate_failures do
       [
-        ['2016-01'        , nil              , [subject]],
-        ['2016-02'        , nil              , []],
-        ['2015-12'        , nil              , [subject]],
-        [nil              , '2016-01'        , [subject]],
-        [nil              , '2016-02'        , [subject]],
-        [nil              , '2015-12'        , []],
-        ['2016-01'        , '2016-01'        , [subject]],
-        ['2015-12'        , '2016-02'        , [subject]],
-        ['2016-02'        , '2015-12'        , []],
+        ['2016-01', nil, [subject]],
+        ['2016-02', nil, []],
+        ['2015-12', nil, [subject]],
+        [nil, '2016-01', [subject]],
+        [nil, '2016-02', [subject]],
+        [nil, '2015-12', []],
+        ['2016-01', '2016-01', [subject]],
+        ['2015-12', '2016-02', [subject]],
+        ['2016-02', '2015-12', []],
       ].each do |from, to, expected|
         result = User.__send__("#{column}_in", from, to)
         expect(result).to contain_exactly(*expected)
       end
     end
 
-    it "should return records [column]", :aggregate_failures do
+    it 'should return records [column]', :aggregate_failures do
       [
-        ['2016-01'        , [subject]],
-        ['2016-12'        , []],
-        [nil              , []],
+        ['2016-01', [subject]],
+        ['2016-12', []],
+        [nil, []],
       ].each do |target_date, expected|
-        result = User.__send__("#{column}", target_date)
+        result = User.__send__(column.to_s, target_date)
         expect(result).to contain_exactly(*expected)
       end
     end
