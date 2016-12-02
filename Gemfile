@@ -4,6 +4,6 @@ source 'https://rubygems.org'
 gemspec
 
 group :test do
-  gem 'activesupport', ENV['RAILS_VERSION'] || '5.0.0.1'
   gem 'activerecord',  ENV['RAILS_VERSION'] || '5.0.0.1'
+  gem 'activesupport', ENV['RAILS_VERSION'] || '5.0.0.1'
 end
