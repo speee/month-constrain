@@ -6,6 +6,11 @@ class CreateUsers < ActiveRecord::Migration
     create_table(:users) do |t|
       t.date :registration_month
     end
+
+    create_table(:books) do |t|
+      t.date :registration_month
+      t.references :user, foreign_key: true
+    end
   end
 end
 
