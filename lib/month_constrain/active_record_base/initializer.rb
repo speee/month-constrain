@@ -15,8 +15,8 @@ module MonthConstrain::ActiveRecordBase
         columns.each do |column|
           scope "#{column}_in".to_sym, lambda { |from, to|
             relation = self
-            relation = relation.where("#{column} >= ?", month_constrain(from)) if from
-            relation = relation.where("#{column} <= ?", month_constrain(to)) if to
+            relation = relation.where(self.arel_table[column.to_sym].gteq(month_constrain(from))) if from
+            relation = relation.where(self.arel_table[column.to_sym].lteq(month_constrain(to))) if to
             relation
           }
 

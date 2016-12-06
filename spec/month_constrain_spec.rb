@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 class User < ActiveRecord::Base
+  has_many :books
+  acts_as_month_constrain :registration_month
+end
+
+class Book < ActiveRecord::Base
+  belongs_to :user
   acts_as_month_constrain :registration_month
 end
 
@@ -75,6 +81,14 @@ describe MonthConstrain do
       ].each do |target_date, expected|
         result = User.__send__(column.to_s, target_date)
         expect(result).to contain_exactly(*expected)
+      end
+    end
+
+    context 'when duplicate column' do
+      before { Book.create(registration_month: base_date, user: subject) }
+      let(:users) { User.joins(:books).__send__("#{column}_in", base_date, base_date) }
+      it 'returns user records' do
+        expect(users).to be_present
       end
     end
   end
