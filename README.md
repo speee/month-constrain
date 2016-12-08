@@ -1,8 +1,9 @@
 # MonthConstrain
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/month_constrain`. To experiment with that code, run `bin/console` for an interactive prompt.
+month_constrain is for managing columns of Date type as month information in ActiveRecord
 
-TODO: Delete this and the text above, and describe your gem
+Converts date information such as `Date.new(2016, 12, 12)` and `"2016-01"` to Date Class.
+
 
 ## Installation
 
@@ -22,20 +23,58 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+**In your model**
 
-## Development
+```rb
+class Book < ApplicationRecord
+  acts_as_month_constrain :published_on
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+  # ...
+end
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Create Record
+
+e.g.
+
+```rb
+>> Client.create(published_on: '2016-01')
+# => #<Client id: 1, published_on: "2016-01-01">
+
+>> Client.create(published_on: Date.new(2016, 1, 16))
+# => #<Client id: 1, published_on: "2016-01-01">
+
+```
+
+Find Record
+
+e.g.
+
+```rb
+>> Client.published_on('2016-01')
+# => #<ActiveRecord::Relation [#<Client id: 1, published_on: "2016-01-01">]>
+
+>> Client.published_on(Date.new(2016, 1, 16))
+# => #<ActiveRecord::Relation [#<Client id: 1, published_on: "2016-01-01">]>
+
+>> Client.published_on_in(Date.new(2016, 1, 16), nil)
+# => #<ActiveRecord::Relation [#<Client id: 5, published_on: "2016-01-01">, #<Client id: 6, published_on: "2016-02-01">, #<Client id: 7, published_on: "2016-03-01">]>
+
+>> Client.published_on_in('2016-01', '2016-02')
+# => #<ActiveRecord::Relation [#<Client id: 5, published_on: "2016-01-01">, #<Client id: 6, published_on: "2016-02-01">]>
+
+```
+
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/month_constrain. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+1. Fork it ( https://github.com/speee/month_constrain/fork )
+2. Create your feature branch (git checkout -b my-new-feature)
+3. Commit your changes (git commit -am 'Add some feature')
+4. Push to the branch (git push origin my-new-feature)
+5. Create a new Pull Request
 
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
