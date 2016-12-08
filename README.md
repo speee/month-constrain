@@ -1,9 +1,9 @@
 # MonthConstrain
 
-month_constrain is for managing columns of Date type as month information in ActiveRecord
-
+month_constrain is for managing columns of Date type as month information in ActiveRecord.
 Converts date information such as `Date.new(2016, 12, 12)` and `"2016-01"` to Date Class.
 
+Supports Rails 4.x and 5.x releases.
 
 ## Installation
 
