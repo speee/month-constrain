@@ -6,7 +6,7 @@ require 'month_constrain/version'
 Gem::Specification.new do |spec|
   spec.name          = 'month_constrain'
   spec.version       = MonthConstrain::VERSION
-  spec.authors       = ['yusaku.hatanaka']
+  spec.authors       = ['Yusaku Hatanaka (hatappi)', 'Speee, Inc.']
   spec.email         = ['yusaku.hatanaka@speee.jp']
 
   spec.summary       = 'month_constrain is a re-implementation of acts_as_month_constrain for Rails 4, and 5.'
